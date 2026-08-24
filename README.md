@@ -5,7 +5,7 @@
 ## 基本说明
 
 本项目是基于PS Vita 游戏《レコラヴ Gold Beach》的非官方中文化补丁，基于日版 1.07（本体 1.00 + 1.07 升级补丁）。
-请自行获取游戏，并确保安装完本体&全部DLC并确认更新到1.07版本才使用。
+请自行获取游戏和解密档案。
 
 汉化范围覆盖：
 
@@ -28,21 +28,20 @@ PS:Vita3K 模拟器未测试
 
 ### 一、准备游戏
 
-补丁以 xdelta 形式发布，需要你自己拥有日版 1.07 的**解密副本**，两种获取方式：
-
-- **Vita3K**：安装游戏与 1.07 升级补丁后即为解密文件（升级内容并入 `ux0/app/PCSG00782/`），DLC 位于 `ux0/addcont/PCSG00782/`；
-- **破解 PSV**：在 VitaShell 中对 `ux0:app`、`ux0:patch`、`ux0:addcont` 打开 `OpenDecrypted` 后，导出 `ux0:app/PCSG00782/`、`ux0:patch/PCSG00782/`（1.07 升级补丁）以及已安装的 DLC `ux0:addcont/PCSG00782/`。
+补丁以 xdelta 形式发布，需要你自己拥有日版 1.07 的合法安装获取的解密副本；
+PSV需要安装Repatch插件；
+在VitaShell中对 `ux0:app`、`ux0:patch`、`ux0:addcont` 打开 `OpenDecrypted` 后，导出 `ux0:app/PCSG00782/`、`ux0:patch/PCSG00782/`（1.07 升级补丁）以及已安装的 DLC `ux0:addcont/PCSG00782/`到电脑上。
 
 请先确认本体与全部 DLC 均已安装、并已更新到 1.07，再提取文件。
 
 ### 二、应用主文件补丁
 
-使用 [DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher)（基于 xdelta3 的免费跨平台图形工具）或 xdelta3 命令行，将 `patches/` 中的补丁逐一对准下表基准文件应用：
+使用 DeltaPatcher 或 xdelta3 命令行，将 `patches/` 中的补丁逐一对准下表基准文件应用：
 
 命令行示例：`xdelta3 -d -f -s <基准文件> <补丁文件> <输出文件>`
 
 |      补丁        |           应用到                   |        得到       | 
-|-----------------|-------------------------------------|------------------|
+|-----------------|------------------------------------|------------------|
 | `eboot.xdelta`  | 1.07 升级的 `eboot.bin`             | 汉化 `eboot.bin`  |
 | `Common.xdelta` | 本体的 `media/cpk/Common.cpk`       | 汉化 `Common.cpk` |
 | `Script.xdelta` | 1.07 升级的 `media/cpk/Script.cpk`  | 汉化 `Script.cpk` |
@@ -52,11 +51,11 @@ PS:Vita3K 模拟器未测试
 注意：
 
 - `Common.cpk` 取自本体（1.00），`eboot.bin`、`Script.cpk`、`Table.cpk`、`UI.cpk` 取自 1.07 升级补丁，两边都需要有。
-- PSV：将应用后的文件按相同目录结构放入 `ux0:rePatch/PCSG00782/`。
+- 将应用后的文件按相同目录结构放入 `ux0:rePatch/PCSG00782/`。
 
 ### 三、应用 DLC 补丁
 
-每个 DLC 对应一个内容 ID 文件夹（如 `RECOLOVE00000006`），补丁按 `内容ID_Script` / `内容ID_Table` 命名。其中 06–09 为四个剧情 DLC（有 Script 补丁），其余 DLC 仅有 Table 补丁（道具/活动标题与描述）。
+每个 DLC 对应一个内容 ID 文件夹，补丁按 `内容ID_Script` / `内容ID_Table` 命名。
 
 1. 找到该 DLC 合法获取安装后的完整解密文件夹；
 2. 将整个文件夹放入 `ux0:reAddcont/PCSG00782/<内容ID>/`（PSV）；
@@ -78,13 +77,13 @@ PS:Vita3K 模拟器未测试
 
 ## 构建方式
 
-本项目使用自有工具链（`tools/`）完成：CPK 解析/重建、CRILAYLA 解压/重压缩、ADV v3 脚本解析与构建、eboot 文本补丁、GXT 贴图润色，以及 xdelta 生成与还原校验。感谢[gothgirllover67/recolovetr](https://github.com/gothgirllover67/recolovetr)提供思路Orz。
+本项目使用自有工具链（`tools/`）完成：CPK 解析/重建、CRILAYLA 解压/重压缩、ADV v3 脚本解析与构建、eboot 文本补丁、GXT 贴图润色，以及 xdelta 生成与还原校验。
 
 重新生成补丁所需条件：
 
-- 正版游戏的解密文件（本体 + 1.07 升级补丁 + 对应 DLC，获取方式见上文）；
+- 自己合法获取的正版游戏的解密文件；
 - Python 3；
-- 依赖安装：`python -m pip install -r requirements.txt`（numpy / Pillow / freetype-py / openpyxl；核心 CPK/ADV 解析与重建为 Python 标准库，无需额外依赖）；
+- 依赖安装：`python -m pip install -r requirements.txt`；
 - xdelta3（发布包已附带生成脚本，指向本地 xdelta3 可执行文件即可）。
 
 主要步骤：解包 CPK → 解析 ADV 脚本与表格 → 套用译文 → 重建 CPK → 生成 xdelta。`tools/build_xdelta_v100.py` 会批量生成全部补丁，并在每个补丁生成后自动执行一次还原校验；脚本内的 xdelta3 路径改为你自己的 xdelta3 可执行文件位置即可。
@@ -96,6 +95,6 @@ PS:Vita3K 模拟器未测试
 
 ## 免责声明
 
-- 本项目仅用作技术交流，仅包含汉化所必需的最小资源（译文文本、xdelta 差异补丁与工具脚本），**不包含完整游戏 ROM、DLC、升级补丁或任何版权素材**；
+- 本项目仅用作技术交流，仅包含汉化所必需的最小资源（译文文本、xdelta 差异补丁与工具脚本），不包含完整游戏 ROM、DLC、升级补丁或任何版权素材；
 - 补丁只能应用于你自己合法拥有的正版游戏解密文件；
 - 请支持正版，请勿用于商业用途；
