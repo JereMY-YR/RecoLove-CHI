@@ -4,26 +4,33 @@
 
 ## 基本说明
 
-本项目是基于PS Vita 游戏《レコラヴ Gold Beach》的非官方中文化补丁，基于日版 1.07（本体 1.00 + 1.07 升级补丁）。
+本项目是基于PS Vita 游戏《レコラヴ Gold Beach》的非官方中文化补丁，基于日版 1.07。
 
 请自行获取游戏和解密档案。
 
 汉化范围覆盖：
 
-- 主线剧情对话（Script.cpk）
-- 系统与UI文本（主菜单、系统设置、游玩履历等）
-- Table文本（提示、名称、筛选、姿势列表等）
-- UI贴图（标题、字幕、加载图等）
-- 角色名字栏的汉字部分字基于freetype锁定基线重绘之后仍为乱码只能保留了。 
+- 主线剧情对
+- 系统与UI文本
+- 贴图
 - 部分DLC的剧情完整脚本和道具名/活动标题/描述
 
 xdelta补丁仅包含汉化所需的极小部分文件、另有补丁清单与构建工具，不包含完整游戏文件，仅对你自己拥有的游戏生效。
 
+## 预览
+<img width="960" height="544" alt="2026-08-24-201656" src="https://github.com/user-attachments/assets/940ec178-d268-4584-909d-ec28e9fe59f1" />
+<img width="960" height="544" alt="2026-08-24-202040" src="https://github.com/user-attachments/assets/620c6d65-1959-4a80-a12d-3ad4bf0f7699" />
+<img width="960" height="544" alt="2026-08-24-201828" src="https://github.com/user-attachments/assets/e8e97d25-b658-49b3-8284-cd09f100aeb5" />
+<img width="960" height="544" alt="2026-08-24-201920" src="https://github.com/user-attachments/assets/f2a62c90-f575-4af2-8cc3-899256cbffec" />
+
+
+
 ## 兼容性
 
-- PS Vita（需安装 rePatch 与 reAddcont 插件）
+- PS Vita（需安装 rePatch 插件）
 - 仅支持日版1.07；基准文件不一致时补丁会校验失败
-- PS:Vita3K 模拟器未测试
+- Vita3K 模拟器未测试
+- 角色名字栏的汉字部分字基于freetype锁定基线重绘之后仍为乱码只能保留了。 
 
 ## 使用方式
 
@@ -43,7 +50,7 @@ PSV需要安装Repatch插件；
 |      补丁        |           应用到                   |        得到       | 
 |-----------------|------------------------------------|------------------|
 | `eboot.xdelta`  | 1.07 升级的 `eboot.bin`             | 汉化 `eboot.bin`  |
-| `Common.xdelta` | 本体的 `media/cpk/Common.cpk`       | 汉化 `Common.cpk` |
+| `Common.xdelta` | 1.00 本体的 `media/cpk/Common.cpk`       | 汉化 `Common.cpk` |
 | `Script.xdelta` | 1.07 升级的 `media/cpk/Script.cpk`  | 汉化 `Script.cpk` |
 | `Table.xdelta`  | 1.07 升级的 `media/cpk/Table.cpk`   | 汉化 `Table.cpk`  |
 | `UI.xdelta`     | 1.07 升级的 `media/cpk/UI.cpk`      | 汉化 `UI.cpk`     |
@@ -89,12 +96,12 @@ PSV需要安装Repatch插件；
 ## 致谢
 
 - 感谢 [gothgirllover67/recolovetr](https://github.com/gothgirllover67/recolovetr) 的英化工程提供参考与完善思路；
-- 感谢 DeltaPatcher
-- 感谢 xdelta3 
+- 感谢 [marco-calautti/DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher)
+- 感谢 [jmacd/xdelta](https://github.com/jmacd/xdelta)
 - 感谢所有参与测试、校对的朋友。
 
 ## 免责声明
 
-- 本项目仅用作技术交流，仅包含汉化所必需的最小资源（译文文本、xdelta 差异补丁与工具脚本），不包含完整游戏 ROM、DLC、升级补丁或任何版权素材；
+- 本项目仅用作技术交流，仅包含汉化所必需的极小部分文件，不包含完整游戏文件；
 - 补丁只能应用于你自己合法拥有的正版游戏解密文件；
 - 请支持正版，请勿用于商业用途；
