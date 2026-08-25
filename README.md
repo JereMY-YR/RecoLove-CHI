@@ -1,4 +1,4 @@
-# 《Reco Love: Gold Beach》中文化补丁
+# 《Reco Love: Gold Beach》中文化方案
 
 > 本补丁仅用作技术交流，请支持正版。
 
